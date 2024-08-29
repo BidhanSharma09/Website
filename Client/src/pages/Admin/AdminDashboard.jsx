@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import Navbar from '../../components/Navbar';
 import { useNavigate } from 'react-router-dom';
 
 const AdminDashboard = () => {
@@ -10,6 +9,8 @@ const AdminDashboard = () => {
   const token = localStorage.getItem('token');
   const navigate = useNavigate();
 
+  const API_URL = import.meta.env.VITE_API_URL
+
   useEffect(() => {
     const fetchArticles = async () => {
       try {
@@ -17,7 +18,7 @@ const AdminDashboard = () => {
           throw new Error('No token found');
         }
 
-        const response = await axios.get('http://localhost:5000/api/articles/admin', {
+        const response = await axios.get(`${API_URL}/api/articles/admin`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -41,7 +42,7 @@ const AdminDashboard = () => {
       }
 
       const response = await axios.put(
-        `http://localhost:5000/api/articles/${id}/status`,
+        `${API_URL}/api/articles/${id}/status`,
         { status },
         {
           headers: {
@@ -82,7 +83,6 @@ const AdminDashboard = () => {
 
   return (
     <>
-      <Navbar />
       <div className="bg-gray-50 py-10 min-h-screen">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h1 className="text-4xl font-extrabold text-gray-900 mb-8">Admin Dashboard</h1>

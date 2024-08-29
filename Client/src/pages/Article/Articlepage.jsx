@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import Navbar from '../../components/Navbar';
-import Footer from '../../components/Footer';
 
 const Articlepage = () => {
   const [articles, setArticles] = useState([]);
@@ -10,7 +8,8 @@ const Articlepage = () => {
   useEffect(() => {
     const fetchArticles = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/articles');
+        // const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/articles`);
+        const response = await axios.get("https://mental-health-w5pp.vercel.app/api/articles")
         setArticles(response.data);
       } catch (error) {
         console.error('Error fetching articles:', error);
@@ -22,7 +21,6 @@ const Articlepage = () => {
 
   return (
     <>
-      <Navbar />
       <div className="bg-gray-100 py-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h1 className="text-4xl font-extrabold text-gray-900 mb-8">Articles</h1>
@@ -61,7 +59,6 @@ const Articlepage = () => {
           </div>
         </div>
       </div>
-      <Footer />
     </>
   );
 };

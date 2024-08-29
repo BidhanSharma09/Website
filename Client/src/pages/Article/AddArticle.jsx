@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
-import axios from 'axios'; // Import Axios
+import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import Navbar from '../../components/Navbar';
-import Footer from '../../components/Footer';
 
 const AddArticle = () => {
   const [article, setArticle] = useState({
@@ -42,7 +40,7 @@ const AddArticle = () => {
 
     try {
       const response = await axios.post(
-        'http://localhost:5000/api/articles',
+        `${import.meta.env.VITE_API_URL}/api/articles`,
         {
           title: article.title,
           author: {
@@ -80,7 +78,6 @@ const AddArticle = () => {
 
   return (
     <>
-      <Navbar />
       <div className="p-4 max-w-lg mx-auto">
         <h1 className="text-2xl font-semibold mb-4">Add New Article</h1>
         <form onSubmit={handleSubmit} className="space-y-4">
@@ -151,7 +148,6 @@ const AddArticle = () => {
           </button>
         </form>
       </div>
-      <Footer />
     </>
   );
 };
